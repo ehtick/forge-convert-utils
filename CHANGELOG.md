@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [7.0.0] - 2025-04-16
+
+- Modified
+  - Method signature of all downloaders for consistency
+  - Casing of all public classes for consistency (`SvfReader` -> `SVFReader`, `GltfWriter` -> `GLTFWriter`, etc)
+- Added
+  - Optional cancellation token for early exit from all downloaders
+  - Sample for F2D download
+
 ## [6.0.1] - 2025-04-08
 
 - Modified
