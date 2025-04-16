@@ -18,7 +18,7 @@ if (!urn || !outputDir) {
 
 const authenticationProvider = initializeAuthenticationProvider();
 const downloader = new SVFDownloader(authenticationProvider);
-downloader.download(urn, { outputDir, log: console.log, region: APS_REGION })
+downloader.download(urn, { outputDir, log: console.log, region: process.env.APS_REGION })
     .then(() => console.log('Done!'))
     .catch(err => {
         console.error(err);
