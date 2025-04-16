@@ -3,7 +3,7 @@
  * Usage:
  *     export APS_CLIENT_ID=<your client id>
  *     export APS_CLIENT_SECRET=<your client secret>
- *     export APS_REGION=<your region> # optional, can be one of the following: "US", "EMEA", "APAC"
+ *     export APS_REGION=<your region> # optional, can be one of the following: "US", "EMEA", "AUS"
  *     node download-svf.js <your model urn> <output folder>
  */
 
