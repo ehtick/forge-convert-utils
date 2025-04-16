@@ -2,14 +2,14 @@
 
 const path = require('path');
 const { parseArgs } = require('node:util');
-const { SVF2Reader, GltfWriter, BasicAuthenticationProvider, TwoLeggedAuthenticationProvider } = require('..');
+const { SVF2Reader, GLTFWriter, BasicAuthenticationProvider, TwoLeggedAuthenticationProvider } = require('..');
 
 async function run(urn, outputDir, options, authenticationProvider) {
     const reader = await SVF2Reader.FromDerivativeService(urn, authenticationProvider);
     const views = await reader.listViews();
     for (const view of views) {
         const scene = await reader.readView(view);
-        const writer = new GltfWriter({
+        const writer = new GLTFWriter({
             deduplicate: false,
             center: options.center,
             ignoreLineGeometry: true,

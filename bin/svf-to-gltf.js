@@ -4,7 +4,7 @@ const path = require('path');
 const { parseArgs } = require('node:util');
 const { Scopes } = require('@aps_sdk/authentication');
 const { ModelDerivativeClient} = require('@aps_sdk/model-derivative');
-const { SvfReader, GltfWriter, BasicAuthenticationProvider, TwoLeggedAuthenticationProvider } = require('../lib');
+const { SVFReader, GLTFWriter, BasicAuthenticationProvider, TwoLeggedAuthenticationProvider } = require('../lib');
 
 const { APS_CLIENT_ID, APS_CLIENT_SECRET, APS_ACCESS_TOKEN, APS_REGION } = process.env;
 let authenticationProvider = null;
@@ -16,17 +16,17 @@ if (APS_ACCESS_TOKEN) {
 
 async function convertRemote(urn, guid, outputFolder, options) {
     console.log(`Converting urn ${urn}, guid ${guid}`);
-    const reader = await SvfReader.FromDerivativeService(urn, guid, authenticationProvider);
+    const reader = await SVFReader.FromDerivativeService(urn, guid, authenticationProvider);
     const scene = await reader.read({ log: console.log });
-    const writer = new GltfWriter(options);
+    const writer = new GLTFWriter(options);
     await writer.write(scene, path.join(outputFolder, guid));
 }
 
 async function convertLocal(svfPath, outputFolder, options) {
     console.log(`Converting local file ${svfPath}`);
-    const reader = await SvfReader.FromFileSystem(svfPath);
+    const reader = await SVFReader.FromFileSystem(svfPath);
     const scene = await reader.read({ log: console.log });
-    const writer = new GltfWriter(options);
+    const writer = new GLTFWriter(options);
     await writer.write(scene, path.join(outputFolder));
 }
 

@@ -19,7 +19,7 @@
  */
 
 const path = require('path')
-const { SVF2Reader, GltfWriter } = require('..');
+const { SVF2Reader, GLTFWriter } = require('..');
 const { initializeAuthenticationProvider } = require('./shared.js');
 
 const [,, urn, outputDir] = process.argv;
@@ -34,7 +34,7 @@ async function run() {
     const views = await reader.listViews();
     for (const view of views) {
         const scene = await reader.readView(view);
-        const writer = new GltfWriter({
+        const writer = new GLTFWriter({
             deduplicate: false,
             skipUnusedUvs: false,
             center: true,

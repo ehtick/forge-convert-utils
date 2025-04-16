@@ -10,13 +10,13 @@
 
 const path = require('path');
 const { getSvfDerivatives } = require('./shared.js');
-const { SvfReader, GltfWriter, TwoLeggedAuthenticationProvider } = require('..');
+const { SVFReader, GLTFWriter, TwoLeggedAuthenticationProvider } = require('..');
 
 /*
  * Customized glTF writer, outputting meshes with an additional _CUSTOM_INDEX
  * mesh attribute (UNSIGNED_BYTE, vec4) encoding a 32-bit object ID.
  */
-class CustomGltfWriter extends GltfWriter {
+class CustomGLTFWriter extends GLTFWriter {
     constructor(options) {
         super(options);
         this._currentDbId = -1;
@@ -67,14 +67,14 @@ async function run(urn, outputDir) {
     try {
         const derivatives = await getSvfDerivatives(urn, APS_CLIENT_ID, APS_CLIENT_SECRET, APS_REGION);
         const authenticationProvider = new TwoLeggedAuthenticationProvider(APS_CLIENT_ID, APS_CLIENT_SECRET);
-        const writer = new CustomGltfWriter({
+        const writer = new CustomGLTFWriter({
             deduplicate: false,
             skipUnusedUvs: false,
             center: true,
             log: console.log
         });
         for (const derivative of derivatives) {
-            const reader = await SvfReader.FromDerivativeService(urn, derivative.guid, authenticationProvider);
+            const reader = await SVFReader.FromDerivativeService(urn, derivative.guid, authenticationProvider);
             const scene = await reader.read({ log: console.log });
             await writer.write(scene, path.join(outputDir, derivative.guid));
         }

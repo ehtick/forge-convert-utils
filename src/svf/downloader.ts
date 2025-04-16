@@ -1,7 +1,7 @@
 import * as path from 'path';
 import * as fse from 'fs-extra';
 import axios from 'axios';
-import { SvfReader } from '..';
+import { SVFReader } from '..';
 import { IAuthenticationProvider } from '../common/authentication-provider';
 import { ManifestResources, ModelDerivativeClient, Region } from '@aps_sdk/model-derivative';
 import { Scopes } from '@aps_sdk/authentication';
@@ -57,7 +57,7 @@ export class Downloader {
             fse.ensureDirSync(guidDir);
             const svf = await this.downloadDerivative(urn, encodeURI((derivative as any).urn), options?.region);
             fse.writeFileSync(path.join(guidDir, 'output.svf'), new Uint8Array(svf));
-            const reader = await SvfReader.FromDerivativeService(urn, guid, this.authenticationProvider, options?.region);
+            const reader = await SVFReader.FromDerivativeService(urn, guid, this.authenticationProvider, options?.region);
             const manifest = await reader.getManifest();
             for (const asset of manifest.assets) {
                 if (options?.cancellationToken?.cancelled) {

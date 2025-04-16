@@ -119,16 +119,16 @@ svf2-to-gltf <urn> <path\to\output\folder>
 
 The library can be used at different levels of granularity.
 
-The easiest way to convert an SVF file is to read the entire model into memory using `SvfReader#read`/`SVF2Reader#read` methods, and save the model into glTF using `GltfWriter#write`. See [samples/remote-svf-to-gltf.js](./samples/remote-svf-to-gltf.js) and [samples/remote-svf2-to-gltf.js](./samples/remote-svf2-to-gltf.js).
+The easiest way to convert an SVF file is to read the entire model into memory using `SVFReader#read`/`SVF2Reader#read` methods, and save the model into glTF using `GLTFWriter#write`. See [samples/remote-svf-to-gltf.js](./samples/remote-svf-to-gltf.js) and [samples/remote-svf2-to-gltf.js](./samples/remote-svf2-to-gltf.js).
 
-If you don't want to read the entire model into memory (for example, when distributing the parsing of an SVF over multiple servers), you can use methods like `SvfReader#enumerateFragments`/`SVF2Reader#enumerateFragments` or `SvfReader#enumerateGeometries`/`SVF2Reader#enumerateGeometries` to _asynchronously_ iterate over individual elements:
+If you don't want to read the entire model into memory (for example, when distributing the parsing of an SVF over multiple servers), you can use methods like `SVFReader#enumerateFragments`/`SVF2Reader#enumerateFragments` or `SVFReader#enumerateGeometries`/`SVF2Reader#enumerateGeometries` to _asynchronously_ iterate over individual elements:
 
 ```js
-const { SvfReader } = require('svf-utils');
+const { SVFReader } = require('svf-utils');
 
 // ...
 
-const reader = await SvfReader.FromDerivativeService(urn, guid, authProvider);
+const reader = await SVFReader.FromDerivativeService(urn, guid, authProvider);
 for await (const fragment of reader.enumerateFragments()) {
     console.log(fragment);
 }
