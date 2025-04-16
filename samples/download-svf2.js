@@ -29,7 +29,7 @@ if (!urn || !outputDir) {
 
 const authenticationProvider = initializeAuthenticationProvider();
 const downloader = new SVF2Downloader(authenticationProvider);
-downloader.download(urn, outputDir)
+downloader.download(urn, { outputDir, log: console.log })
     .then(() => console.log('Done!'))
     .catch(err => {
         console.error(err);
