@@ -60,7 +60,12 @@ const ViewSchema = z.object({
     manifest: ManifestSchema,
     stats: StatsSchema.optional(),
     georeference: GeoreferenceSchema.optional(),
-    fragmentTransformsOffset: FragmentTransformsOffsetSchema.optional()
+    fragmentTransformsOffset: FragmentTransformsOffsetSchema.optional(),
+    "world bounding box": WorldBoundingBoxSchema.optional(),
+    "world up vector": WorldVectorSchema.optional(),
+    "world front vector": WorldVectorSchema.optional(),
+    "world north vector": WorldVectorSchema.optional(),
+    "distance unit": z.object({ value: z.string() }).optional()
 });
 
 export type View = z.infer<typeof ViewSchema>;
