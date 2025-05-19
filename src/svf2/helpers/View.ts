@@ -54,6 +54,15 @@ const FragmentTransformsOffsetSchema = z.object({
     z: z.number()
 });
 
+const WorldBoundingBoxSchema = z.object({
+    minXYZ: z.array(z.number()),
+    maxXYZ: z.array(z.number())
+});
+
+const WorldVectorSchema = z.object({
+    XYZ: z.array(z.number())
+});
+
 const ViewSchema = z.object({
     name: z.string(),
     version: z.number(),
