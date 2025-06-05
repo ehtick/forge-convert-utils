@@ -117,5 +117,5 @@ export function findManifestSVF2(manifest: Manifest): OTGManifest {
  * @returns The resolved URN.
  */
 export function resolveViewURN(manifest: OTGManifest, view: View) {
-    return path.normalize(path.join(manifest.paths.version_root, view.urn))
+    return path.posix.normalize(path.posix.join(manifest.paths.version_root, view.urn))
 }
