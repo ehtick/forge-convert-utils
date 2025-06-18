@@ -54,13 +54,27 @@ const FragmentTransformsOffsetSchema = z.object({
     z: z.number()
 });
 
+const WorldBoundingBoxSchema = z.object({
+    minXYZ: z.array(z.number()),
+    maxXYZ: z.array(z.number())
+});
+
+const WorldVectorSchema = z.object({
+    XYZ: z.array(z.number())
+});
+
 const ViewSchema = z.object({
     name: z.string(),
     version: z.number(),
     manifest: ManifestSchema,
     stats: StatsSchema.optional(),
     georeference: GeoreferenceSchema.optional(),
-    fragmentTransformsOffset: FragmentTransformsOffsetSchema.optional()
+    fragmentTransformsOffset: FragmentTransformsOffsetSchema.optional(),
+    "world bounding box": WorldBoundingBoxSchema.optional(),
+    "world up vector": WorldVectorSchema.optional(),
+    "world front vector": WorldVectorSchema.optional(),
+    "world north vector": WorldVectorSchema.optional(),
+    "distance unit": z.object({ value: z.string() }).optional()
 });
 
 export type View = z.infer<typeof ViewSchema>;
