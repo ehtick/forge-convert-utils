@@ -12,6 +12,7 @@ import { parseMeshes } from './meshes';
 import * as SVF from './schema';
 import * as IMF from '../common/intermediate-format';
 import { IAuthenticationProvider } from '../common/authentication-provider';
+import { SdkManagerBuilder } from '@aps_sdk/autodesk-sdkmanager';
 
 /**
  * Entire content of SVF and its assets loaded in memory.
@@ -207,9 +208,14 @@ export class Reader {
      * @param {Region} [region] Optional region to be used by all APS calls.
      * @returns {Promise<Reader>} Reader for the provided SVF.
      */
-    static async FromDerivativeService(urn: string, guid: string, authenticationProvider: IAuthenticationProvider, region?: Region): Promise<Reader> {
+    static async FromDerivativeService(urn: string, guid: string, authenticationProvider: IAuthenticationProvider, region?: Region, baseAddress="https://developer.api.autodesk.com" ): Promise<Reader> {
         urn = urn.replace(/=/g, '');
-        const modelDerivativeClient = new ModelDerivativeClient();
+        const sdkManager = SdkManagerBuilder.create().addApsConfiguration({
+            baseAddress: new URL(baseAddress),
+            }).build();
+        const modelDerivativeClient = new ModelDerivativeClient({
+            sdkManager,
+            });
         const accessToken = await authenticationProvider.getToken([Scopes.ViewablesRead]);
         const manifest = await modelDerivativeClient.getManifest(urn, { accessToken, region });
         let foundDerivative: ManifestResources | null = null;
