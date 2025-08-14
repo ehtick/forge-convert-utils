@@ -28,7 +28,7 @@ export interface ISvfContent {
 }
 
 export class Scene implements IMF.IScene {
-    constructor(protected svf: ISvfContent) {}
+    constructor(protected svf: ISvfContent) { }
 
     getMetadata(): IMF.IMetadata {
         return this.svf.metadata.metadata;
@@ -124,8 +124,8 @@ export class Scene implements IMF.IScene {
             diffuse: { x: 0, y: 0, z: 0 },
             metallic: _mat?.metal ? 1.0 : 0.0,
             opacity: _mat?.opacity ?? 1.0,
-            roughness: _mat?.glossiness ? ( 20.0/ _mat.glossiness ) : 1.0, // TODO: how to map glossiness to roughness properly?
-            scale: {x: _mat?.maps?.diffuse?.scale.texture_UScale ?? 1.0 , y: _mat?.maps?.diffuse?.scale.texture_VScale ?? 1.0}
+            roughness: _mat?.glossiness ? (20.0 / _mat.glossiness) : 1.0, // TODO: how to map glossiness to roughness properly?
+            scale: { x: _mat?.maps?.diffuse?.scale.texture_UScale ?? 1.0, y: _mat?.maps?.diffuse?.scale.texture_VScale ?? 1.0 }
         };
         if (_mat?.diffuse) {
             mat.diffuse.x = _mat.diffuse[0];
@@ -136,8 +136,8 @@ export class Scene implements IMF.IScene {
             mat.diffuse.x = _mat.specular[0];
             mat.diffuse.y = _mat.specular[1];
             mat.diffuse.z = _mat.specular[2];
-            mat.roughness = 60/_mat.glossiness;
-        }   
+            mat.roughness = 60 / _mat.glossiness;
+        }
         if (_mat?.maps?.diffuse) {
             mat.maps = mat.maps || {};
             mat.maps.diffuse = _mat.maps.diffuse.uri
@@ -208,14 +208,14 @@ export class Reader {
      * @param {Region} [region] Optional region to be used by all APS calls.
      * @returns {Promise<Reader>} Reader for the provided SVF.
      */
-    static async FromDerivativeService(urn: string, guid: string, authenticationProvider: IAuthenticationProvider, region?: Region, baseAddress="https://developer.api.autodesk.com" ): Promise<Reader> {
+    static async FromDerivativeService(urn: string, guid: string, authenticationProvider: IAuthenticationProvider, region?: Region, baseAddress = "https://developer.api.autodesk.com"): Promise<Reader> {
         urn = urn.replace(/=/g, '');
         const sdkManager = SdkManagerBuilder.create().addApsConfiguration({
             baseAddress: new URL(baseAddress),
-            }).build();
+        }).build();
         const modelDerivativeClient = new ModelDerivativeClient({
             sdkManager,
-            });
+        });
         const accessToken = await authenticationProvider.getToken([Scopes.ViewablesRead]);
         const manifest = await modelDerivativeClient.getManifest(urn, { accessToken, region });
         let foundDerivative: ManifestResources | null = null;
@@ -307,7 +307,7 @@ export class Reader {
             images: {}
         };
         let tasks: Promise<void>[] = [];
-        const log = (options && options.log) || function (msg: string) {};
+        const log = (options && options.log) || function (msg: string) { };
 
         log(`Reading fragments...`);
         output.fragments = await this.readFragments();
@@ -560,12 +560,12 @@ export class Reader {
         // Sometimes, Model Derivative service URIs must be left unmodified...
         try {
             imageData = await this.getAsset(uri);
-        } catch (err) {}
+        } catch (err) { }
         // Sometimes, they must be lower-cased...
         if (!imageData) {
             try {
                 imageData = await this.getAsset(uri.toLowerCase());
-            } catch (err) {}
+            } catch (err) { }
         }
         // And sometimes, they're just missing...
         if (!imageData) {

@@ -18,11 +18,11 @@ export interface IDownloadOptions {
 export class Downloader {
     protected readonly modelDerivativeClient = new ModelDerivativeClient();
 
-    constructor(protected authenticationProvider: IAuthenticationProvider) {}
+    constructor(protected authenticationProvider: IAuthenticationProvider) { }
 
     async download(urn: string, options?: IDownloadOptions): Promise<void> {
         const outputDir = options?.outputDir || '.';
-        const log = options?.log || ((message: string) => {});
+        const log = options?.log || ((message: string) => { });
         log(`Downloading derivative ${urn} (region: ${options?.region || 'default'})`);
         const accessToken = await this.authenticationProvider.getToken([Scopes.ViewablesRead]);
         const manifest = await this.modelDerivativeClient.getManifest(urn, { accessToken, region: options?.region });

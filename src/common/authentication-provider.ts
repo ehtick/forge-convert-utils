@@ -5,7 +5,7 @@ export interface IAuthenticationProvider {
 }
 
 export class BasicAuthenticationProvider implements IAuthenticationProvider {
-    constructor(protected accessToken: string) {}
+    constructor(protected accessToken: string) { }
 
     async getToken(scopes: Scopes[]): Promise<string> {
         // TODO: check if the hard-coded token has all the needed scopes

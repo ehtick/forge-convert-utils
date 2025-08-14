@@ -9,7 +9,7 @@ import { IMesh, ILines, IPoints, IUVMap } from './schema';
  * @returns {Iterable<IMesh | ILines | IPoints | null>} Instances of parsed meshes, or null values
  * if the mesh cannot be parsed (and to maintain the indices used in {@link IGeometry}).
  */
-export function *parseMeshes(buffer: Buffer): Iterable<IMesh | ILines | IPoints | null> {
+export function* parseMeshes(buffer: Buffer): Iterable<IMesh | ILines | IPoints | null> {
     const pfr = new PackFileReader(buffer);
     for (let i = 0, len = pfr.numEntries(); i < len; i++) {
         const entry = pfr.seekEntry(i);

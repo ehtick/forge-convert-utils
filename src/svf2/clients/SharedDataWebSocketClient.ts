@@ -94,7 +94,7 @@ export class SharedDataWebSocketClient {
         return resources;
     }
 
-    constructor(protected readonly ws: WebSocket, protected readonly authenticationProvider: IAuthenticationProvider) {}
+    constructor(protected readonly ws: WebSocket, protected readonly authenticationProvider: IAuthenticationProvider) { }
 
     close() {
         this.ws.close();

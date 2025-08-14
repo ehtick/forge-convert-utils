@@ -9,7 +9,7 @@ export class ImagePlaceholder {
     private static _bmp: Buffer | undefined;
     private static _gif: Buffer | undefined;
 
-    private constructor() {}
+    private constructor() { }
 
     public static get JPG(): Buffer {
         if (!this._jpg) {

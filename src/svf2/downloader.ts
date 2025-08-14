@@ -30,7 +30,7 @@ export class Downloader {
 
     async download(urn: string, options?: IDownloadOptions): Promise<void> {
         const outputDir = options?.outputDir || '.';
-        const log = options?.log || ((message: string) => {});
+        const log = options?.log || ((message: string) => { });
         log(`Downloading ${urn}...`);
         const urnDir = path.join(outputDir, urn);
         await fse.ensureDir(urnDir);
@@ -51,7 +51,7 @@ export class Downloader {
     }
 
     protected async downloadView(urn: string, manifest: OTGManifest, viewId: string, outputDir: string, sharedAssetsDir: string, options?: IDownloadOptions): Promise<void> {
-        const log = options?.log || ((message: string) => {});
+        const log = options?.log || ((message: string) => { });
         log(`Downloading view ${viewId}...`);
         await fse.ensureDir(outputDir);
         const resolvedViewURN = resolveViewURN(manifest, manifest.views[viewId]);
@@ -81,7 +81,7 @@ export class Downloader {
     }
 
     protected async downloadFragments(urn: string, resolvedViewURN: string, view: View, outputDir: string, sharedAssetsDir: string, options?: IDownloadOptions): Promise<void> {
-        const log = options?.log || ((message: string) => {});
+        const log = options?.log || ((message: string) => { });
         log(`Downloading fragment list...`);
         const resolvedFragmentListUrn = resolveAssetUrn(resolvedViewURN, view.manifest.assets.fragments);
         const fragmentListBuffer = await this.modelDataClient.getAsset(urn, encodeURIComponent(resolvedFragmentListUrn));
@@ -89,7 +89,7 @@ export class Downloader {
     }
 
     protected async downloadGeometries(urn: string, resolvedViewURN: string, view: View, outputDir: string, sharedAssetsDir: string, options?: IDownloadOptions): Promise<void> {
-        const log = options?.log || ((message: string) => {});
+        const log = options?.log || ((message: string) => { });
         log(`Downloading geometry list...`);
         const resolvedGeometryListUrn = resolveAssetUrn(resolvedViewURN, view.manifest.assets.geometry_ptrs!);
         const geometryListBuffer = await this.modelDataClient.getAsset(urn, encodeURIComponent(resolvedGeometryListUrn));
@@ -113,7 +113,7 @@ export class Downloader {
     }
 
     protected async downloadGeometriesBatch(urn: string, resolvedViewURN: string, view: View, outputDir: string, sharedAssetsDir: string, options?: IDownloadOptions): Promise<void> {
-        const log = options?.log || ((message: string) => {});
+        const log = options?.log || ((message: string) => { });
         log(`Downloading geometry list...`);
         const resolvedGeometryListUrn = resolveAssetUrn(resolvedViewURN, view.manifest.assets.geometry_ptrs!);
         const geometryListBuffer = await this.modelDataClient.getAsset(urn, encodeURIComponent(resolvedGeometryListUrn));
@@ -150,7 +150,7 @@ export class Downloader {
     }
 
     protected async downloadMaterials(urn: string, resolvedViewURN: string, view: View, outputDir: string, sharedAssetsDir: string, options?: IDownloadOptions): Promise<void> {
-        const log = options?.log || ((message: string) => {});
+        const log = options?.log || ((message: string) => { });
         log(`Downloading material list...`);
         const resolvedMaterialListUrn = resolveAssetUrn(resolvedViewURN, view.manifest.assets.materials_ptrs!);
         const materialListBuffer = await this.modelDataClient.getAsset(urn, encodeURIComponent(resolvedMaterialListUrn));
@@ -174,7 +174,7 @@ export class Downloader {
     }
 
     protected async downloadMaterialsBatch(urn: string, resolvedViewURN: string, view: View, outputDir: string, sharedAssetsDir: string, options?: IDownloadOptions): Promise<void> {
-        const log = options?.log || ((message: string) => {});
+        const log = options?.log || ((message: string) => { });
         log(`Downloading material list...`);
         const resolvedMaterialListUrn = resolveAssetUrn(resolvedViewURN, view.manifest.assets.materials_ptrs!);
         const materialListBuffer = await this.modelDataClient.getAsset(urn, encodeURIComponent(resolvedMaterialListUrn));
@@ -214,7 +214,7 @@ export class Downloader {
         if (!view.manifest.assets.texture_manifest) {
             return;
         }
-        const log = options?.log || ((message: string) => {});
+        const log = options?.log || ((message: string) => { });
         log(`Downloading texture manifest...`);
         const resolvedTextureManifestUrn = resolveAssetUrn(resolvedViewUrn, view.manifest.assets.texture_manifest);
         const textureManifestBuffer = await this.modelDataClient.getAsset(urn, encodeURIComponent(resolvedTextureManifestUrn));
@@ -239,7 +239,7 @@ export class Downloader {
     }
 
     protected async downloadProperties(urn: string, resolvedViewURN: string, view: View, outputDir: string, sharedAssetsDir: string, options?: IDownloadOptions): Promise<void> {
-        const log = options?.log || ((message: string) => {});
+        const log = options?.log || ((message: string) => { });
         log(`Downloading property assets...`);
         const write = async (uri?: string) => {
             if (uri) {

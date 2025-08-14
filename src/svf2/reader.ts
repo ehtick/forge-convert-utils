@@ -29,11 +29,11 @@ export class Reader {
         protected modelDataClient: ModelDataHttpClient,
         protected sharedDataClient: SharedDataHttpClient,
         protected authenticationProvider: IAuthenticationProvider
-    ) {}
+    ) { }
 
     protected properties: PropDbReader | undefined;
 
-    async listViews(): Promise<string[]>  {
+    async listViews(): Promise<string[]> {
         const ids: string[] = [];
         for (const [id, view] of Object.entries(this.manifest.views)) {
             if (view.role === 'graphics' && view.mime === 'application/autodesk-otg') {
@@ -210,7 +210,7 @@ export class Scene implements IMF.IScene {
         protected geometries: Geometry[],
         protected materials: Material[],
         protected textures: Map<string, any>
-    ) {}
+    ) { }
 
     getMetadata(): IMF.IMetadata {
         return this.metadata;

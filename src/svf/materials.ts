@@ -8,13 +8,13 @@ namespace SvfInternal {
         scene: { [key: string]: any };
         materials: { [key: string]: IMaterialGroup };
     }
-    
+
     export interface IMaterialGroup {
         version: number;
         userassets: string[];
         materials: { [key: string]: IMaterial };
     }
-    
+
     export interface IMaterial {
         tag: string;
         proteinType: string;
@@ -44,7 +44,7 @@ namespace SvfInternal {
  * @param {Buffer} buffer Binary buffer to parse.
  * @returns {Iterable<IMaterial | null>} Instances of parsed materials, or null if there are none (or are not supported).
  */
-export function *parseMaterials(buffer: Buffer): Iterable<IMaterial | null> {
+export function* parseMaterials(buffer: Buffer): Iterable<IMaterial | null> {
     if (buffer[0] === 31 && buffer[1] === 139) {
         buffer = zlib.gunzipSync(buffer);
     }
@@ -150,10 +150,13 @@ function parseTextureProperty(material: SvfInternal.IMaterial, group: SvfInterna
             })
             */
             if (uri) {
-                return { uri, scale: {
-                    texture_UScale,
-                    texture_VScale
-                } };
+                return {
+                    uri,
+                    scale: {
+                        texture_UScale,
+                        texture_VScale
+                    }
+                };
             }
         }
     }

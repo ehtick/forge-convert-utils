@@ -8,7 +8,7 @@ import { PackFileReader } from "../common/packfile-reader";
  * @param {Buffer} buffer Binary buffer to parse.
  * @returns {Iterable<IGeometryMetadata>} Instances of parsed geometries.
  */
-export function *parseGeometries(buffer: Buffer): Iterable<IGeometryMetadata> {
+export function* parseGeometries(buffer: Buffer): Iterable<IGeometryMetadata> {
     const pfr = new PackFileReader(buffer);
     for (let i = 0, len = pfr.numEntries(); i < len; i++) {
         const entry = pfr.seekEntry(i);

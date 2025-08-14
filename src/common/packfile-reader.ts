@@ -28,7 +28,7 @@ export class PackFileReader extends InputStream {
         const typesOffset = this.getUint32();
 
         // Populate entries
-        this._entries = []; 
+        this._entries = [];
         this.seek(entriesOffset);
         const entriesCount = this.getVarint();
         for (let i = 0; i < entriesCount; i++) {
@@ -72,11 +72,11 @@ export class PackFileReader extends InputStream {
     }
 
     getVector3D(): IVector3 {
-       return {
-           x: this.getFloat64(),
-           y: this.getFloat64(),
-           z: this.getFloat64()
-       };
+        return {
+            x: this.getFloat64(),
+            y: this.getFloat64(),
+            z: this.getFloat64()
+        };
     }
 
     getQuaternion(): IQuaternion {
@@ -89,13 +89,13 @@ export class PackFileReader extends InputStream {
     }
 
     getMatrix3x3(): Matrix3x3 {
-       const elements = [];
-       for (let i = 0; i < 3; i++) {
-           for (let j = 0; j < 3; j++) {
-               elements.push(this.getFloat32());
-           }
-       }
-       return elements;
+        const elements = [];
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                elements.push(this.getFloat32());
+            }
+        }
+        return elements;
     }
 
     getTransform(): Transform | null {

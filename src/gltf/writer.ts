@@ -73,7 +73,7 @@ export class Writer {
             deduplicate: !!options.deduplicate,
             skipUnusedUvs: !!options.skipUnusedUvs,
             center: !!options.center,
-            log: (options && options.log) || function (msg: string) {},
+            log: (options && options.log) || function (msg: string) { },
             filter: options && options.filter || ((dbid: number, fragid: number) => true)
         };
 
@@ -160,7 +160,7 @@ export class Writer {
         };
     }
 
-    protected async postprocess(imf: IMF.IScene, gltfPath: string) {}
+    protected async postprocess(imf: IMF.IScene, gltfPath: string) { }
 
     protected serializeManifest(manifest: gltf.GlTf, outputPath: string) {
         fse.writeFileSync(outputPath, JSON.stringify(manifest, null, 4));
