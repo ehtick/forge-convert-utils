@@ -169,20 +169,7 @@ When converting models from [Model Derivative service](https://aps.autodesk.com/
     ...
 ```
 
-The structure of the sqlite database, and the way to extract model properties from it is explained in https://github.com/wallabyway/propertyServer/blob/master/pipeline.md. Here's a simple diagram showing the individual tables in the database, and the relationships between them:
-
-![Property Database Diagram](https://user-images.githubusercontent.com/440241/42006177-35a1070e-7a2d-11e8-8c9e-48a0afeea00f.png)
-
-And here's an example query listing all objects with "Material" property containing the "Concrete" word:
-
-```sql
-SELECT _objects_id.id AS dbId, _objects_id.external_id AS externalId, _objects_attr.name AS propName, _objects_val.value AS propValue
-FROM _objects_eav
-    INNER JOIN _objects_id ON _objects_eav.entity_id = _objects_id.id
-    INNER JOIN _objects_attr ON _objects_eav.attribute_id = _objects_attr.id
-    INNER JOIN _objects_val ON _objects_eav.value_id = _objects_val.id
-WHERE propName = "Material" AND propValue LIKE "%Concrete%"
-```
+The structure of the sqlite database, and the way to extract model properties from it is explained in https://github.com/wallabyway/propertyServer/blob/master/pipeline.md.
 
 ### GLB, Draco, and other post-processing
 
